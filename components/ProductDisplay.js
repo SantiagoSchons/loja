@@ -1,10 +1,5 @@
 app.component('product-display', {
-  props: {
-    premium: {
-      type: Boolean,
-      required: true
-    }
-  },
+
   template: 
   /*html*/
   `<div class="product-display">
@@ -13,7 +8,7 @@ app.component('product-display', {
         <img v-bind:src="image">
       </div>
       <div class="product-info">
-        <h1>{{ title }}</h1>
+        <h1>{{ product }}</h1>
 
         <p v-if="inStock">In Stock</p>
         <p v-else>Out of Stock</p>
@@ -28,7 +23,10 @@ app.component('product-display', {
           :key="variant.id" 
           @mouseover="updateVariant(index)" 
           class="color-circle" 
-          :style="{ backgroundColor: variant.color }">
+          :style="{ backgroundColor: variant.color }"
+          >
+          {{variant.id}} 
+          {{lotes}}
         </div>
         
         <button 
@@ -36,6 +34,7 @@ app.component('product-display', {
           :class="{ disabledButton: !inStock }" 
           :disabled="!inStock" 
           v-on:click="addToCart">
+          
           Add to Cart
         </button>
 
@@ -44,13 +43,16 @@ app.component('product-display', {
   </div>`,
   data() {
     return {
-        product: 'Socks',
-        brand: 'Vue Mastery',
+        lotes: "lotes", 
+        product: 'Lotes no Céu',
         selectedVariant: 0,
-        details: ['50% cotton', '30% wool', '20% polyester'],
+        details: ['Diversos lotes com diversos tamanhos'],
         variants: [
-          { id: 2234, color: 'green', image: './assets/images/socks_green.jpg', quantity: 50 },
-          { id: 2235, color: 'blue', image: './assets/images/socks_blue.jpg', quantity: 0 },
+          { id: 11, image: './assets/images/terrenos.png', quantity: 1, color: '#ff9999' },
+          { id: 10, image: './assets/images/terrenos11.png', quantity: 1, color: '#99ccff' },
+          { id: 9, image: './assets/images/terrenos10.png', quantity: 1, color: '#ccffcc' },
+          { id: 8, image: './assets/images/terrenos9.png', quantity: 1, color: '#ffff99' },
+          { id: 7, image: './assets/images/terrenos8.png', quantity: 1, color: '#d9b3ff' }
         ]
     }
   },
@@ -63,9 +65,6 @@ app.component('product-display', {
       }
   },
   computed: {
-      title() {
-          return this.brand + ' ' + this.product
-      },
       image() {
           return this.variants[this.selectedVariant].image
       },
@@ -73,10 +72,8 @@ app.component('product-display', {
           return this.variants[this.selectedVariant].quantity
       },
       shipping() {
-        if (this.premium) {
-          return 'Free'
-        }
-        return 2.99
+
+        return "5 almas"
       }
   }
 })
