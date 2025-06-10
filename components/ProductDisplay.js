@@ -23,7 +23,7 @@ app.component('product-display', {
           :key="variant.id" 
           @mouseover="updateVariant(index)" 
           class="color-circle" 
-          :style="{ backgroundColor: variant.color }"
+          
           >
           {{variant.id}} 
           {{lotes}}
